@@ -10,7 +10,7 @@ import os
 MODULE_NAME = "/PreprocessingAPI"
 
 APP_PATH = os.getcwd()
-DATABASE_BASE_PATH = APP_PATH[:-len(MODULE_NAME)] + "/Databases"
+DATABASE_BASE_PATH = APP_PATH_"/Databases" #APP_PATH[:-len(MODULE_NAME)] + "/Databases"
 
 
 # - Raster / Polygon IO dircetories
