@@ -7,10 +7,10 @@ import os
 
 
 # - App dirctoriess
-MODULE_NAME = "/PreprocessingAPI"
+MODULE_NAME = "/CalicoGIS"
 
-APP_PATH = os.getcwd()
-DATABASE_BASE_PATH = APP_PATH_"/Databases" #APP_PATH[:-len(MODULE_NAME)] + "/Databases"
+APP_PATH = os.getcwd() + "/CalicoGIS"
+DATABASE_BASE_PATH = APP_PATH + "/Databases"
 
 
 # - Raster / Polygon IO dircetories

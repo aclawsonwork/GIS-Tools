@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import arcpy
-from arcpy import env
+#from arcpy import env
 from arcpy.sa import * 
 
 import CalicoGIS.PreprocessingAPI.Path as path
