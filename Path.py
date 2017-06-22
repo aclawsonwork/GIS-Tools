@@ -7,7 +7,7 @@ import os
 
 
 # - App dirctoriess
-MODULE_NAME = "/GopherGIS"
+MODULE_NAME = "/PreprocessingAPI"
 
 APP_PATH = os.getcwd()
 DATABASE_BASE_PATH = APP_PATH[:-len(MODULE_NAME)] + "/Databases"
