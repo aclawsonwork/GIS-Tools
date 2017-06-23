@@ -22,16 +22,16 @@ class StateCropRasterBuilder:
         process = db.StateBoundaryExtract()
         message = "Extracting state boundary for: " + self.StateAbbreviation
         print(message)
-        #process.Start()
+        process.Start()
         arcpy.Select_analysis(
                               in_features = path.STATE_BOUNDARY_INPUT,
                               out_feature_class = self.StateBoundaryPath,
                               where_clause = "STUSPS = '" + self.StateAbbreviation + "'"
                               )
-        #process.Stop()
+        process.Stop()
         message = "State boundary extraction succeeded." 
         print(message)
-        #message = "Process Time: " + str(process.ElapsedTime) + " ms"
+        message = "Process Time: " + str(process.ElapsedTime) + " seconds"
         print(message)
 
         

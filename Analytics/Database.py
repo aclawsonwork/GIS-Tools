@@ -56,7 +56,7 @@ class Process:
     def Stop(self):
         self.EndTime = time.time()
         self.ElapsedTime = self.EndTime - self.StartTime
-        self.Writer.Write()
+        #self.Writer.Write()
             
 class StateBoundaryExtract(Process):
     def __init__(self):
