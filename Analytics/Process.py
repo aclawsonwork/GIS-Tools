@@ -32,3 +32,17 @@ class StateBoundaryExtract(Process):
         self.Tablename = "state_boundary_extract"
         self.Date = datetime.date.today()
         self.Writer = db.DBWriter(self)
+        
+class ExtractByMask(Process):
+    def __init__(self):
+        self.Name = "Extract Raster By Mask"
+        self.Tablename = "raster_extract"
+        self.Data = datetime.date.today()
+        self.Writer = db.DBWriter(self)
+        
+class ConvertRasterToPolygon(Process):
+    def __init__(self):
+        self.Name = "Convert Raster to Polygon"
+        self.Tablename = "raster_conversion"
+        self.Data = datetime.date.today()
+        self.Writer = db.DBWriter(self)

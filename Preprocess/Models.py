@@ -19,7 +19,7 @@ class StateCropRasterBuilder:
         self.CropRasterOutputPath = path.CROP_RASTER_BASE_PATH + rasterTitle + self.StateAbbreviation
         self.CropPolygonOutputPath = path.CROP_POLYGON_BASE_PATH + self.RasterTitle + "_" + self.StateAbbreviation
         
-    def ExportStateBoundaries(self):
+    def ExportBoundaries(self):
         process = proc.StateBoundaryExtract()
         message = "Extracting state boundary for: " + self.StateAbbreviation
         print(message)
@@ -36,29 +36,38 @@ class StateCropRasterBuilder:
         print(message)
 
         
-    def ExtractCropRasterFromStateMask(self, imageName):
+    def ExtractRasterFromMask(self, imageName):
+        arcpy.CheckOutExtension("Spatial")
+        process = proc.ExtractByMask()
         message = "Extracting crop raster from state mask for " + self.StateAbbreviation
         print(message)
-        
+        process.Start()
         inputDir = path.CROP_RASTER_BASE_PATH + self.RasterTitle
         self.CropRasterOutputPath = path.CROP_RASTER_BASE_PATH + self.RasterTitle + "_" + self.StateAbbreviation
         outExtractByMask = ExtractByMask(inputDir, self.StateBoundaryPath)
         outExtractByMask.save(self.CropRasterOutputPath)
-        
+        process.Stop()
+        arcpy.CheckInExtension("Spatial")
         message = "Finished extracting state crop raster for " + self.StateAbbreviation
-        
-    def ConvertCropRasterToPolygon(self):
-        message = "Converting crop raster for " + self.StateAbbreviation + " to polygon"
+        print(message)
+        message = "Process Time: " + str(process.ElapsedTime) + " seconds"
         print(message)
         
+    def ConvertRasterToPolygon(self):
+        process = proc.ConvertRasterToPolygon()
+        message = "Converting crop raster for " + self.StateAbbreviation + " to polygon"
+        print(message)
+        process.Start()
         arcpy.RasterToPolygon_conversion(
                                          in_raster = self.CropRasterOutputPath,
                                          out_polygon_features = self.CropPolygonOutputPath,
                                          simplify = "NO_SIMPLIFY",
                                          raster_field = "VALUE"
                                          )
+        process.Stop()
         
         message = "Finished converting crop raster to polygon for " + self.StateAbbreviation
         print(message)
+        message = "Process Time: " + str(process.ElapsedTime) + " seconds"
         
         
