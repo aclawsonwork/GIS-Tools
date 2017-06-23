@@ -5,6 +5,7 @@ import arcpy
 #from arcpy.sa import * 
 import CalicoGIS.Path as path
 import CalicoGIS.Analytics.Database as db
+import CalicoGIS.Analytics.Process as proc
 
 
 
@@ -19,7 +20,7 @@ class StateCropRasterBuilder:
         self.CropPolygonOutputPath = path.CROP_POLYGON_BASE_PATH + self.RasterTitle + "_" + self.StateAbbreviation
         
     def ExportStateBoundaries(self):
-        process = db.StateBoundaryExtract()
+        process = proc.StateBoundaryExtract()
         message = "Extracting state boundary for: " + self.StateAbbreviation
         print(message)
         process.Start()
