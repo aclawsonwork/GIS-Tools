@@ -46,3 +46,10 @@ class ConvertRasterToPolygon(Process):
         self.Tablename = "raster_conversion"
         self.Data = datetime.date.today()
         self.Writer = db.DBWriter(self)
+        
+class ImportPolygonToSDE(Process):
+    def __init__(self):
+        self.Name = "Import Polygon To SDE"
+        self.Tablename = "import_polygon"
+        self.Data = datetime.date.today()
+        self.Writer = db.DBWriter(self)

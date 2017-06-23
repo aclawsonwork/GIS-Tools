@@ -36,7 +36,7 @@ class StateCropRasterBuilder:
         print(message)
 
         
-    def ExtractRasterFromMask(self, imageName):
+    def ExtractRasterFromMask(self):
         arcpy.CheckOutExtension("Spatial")
         process = proc.ExtractByMask()
         message = "Extracting crop raster from state mask for " + self.StateAbbreviation
@@ -71,4 +71,19 @@ class StateCropRasterBuilder:
         message = "Process Time: " + str(process.ElapsedTime) + " seconds"
         print(message)
         
+    def ImportPolygonToSDE(self, whereClause, config):
+        process = proc.ImportPolygonToSDE()
         
+        message = "Import polygon to SDE for " + self.StateAbbreviation
+        print(message)
+        process.Start()
+        arcpy.FeatureClassToFeatureClass_conversion(in_features=self.CropPolygonOutputPath,
+                                                out_path=path.SDE_SPATIAL_PATH,
+                                                out_name=self.RasterTitle + "_" + self.StateAbbreviation,
+                                                where_clause=whereClause,
+                                                config_keyword=config)
+        
+        process.Stop()
+        message = "Import to SDE finished for " + self.StateAbbreviation
+        print(message)
+        message = "Process Time: " + str(process.ElapsedTime)
