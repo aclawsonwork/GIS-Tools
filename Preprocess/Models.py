@@ -69,5 +69,6 @@ class StateCropRasterBuilder:
         message = "Finished converting crop raster to polygon for " + self.StateAbbreviation
         print(message)
         message = "Process Time: " + str(process.ElapsedTime) + " seconds"
+        print(message)
         
         
