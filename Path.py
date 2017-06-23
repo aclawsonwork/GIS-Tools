@@ -10,7 +10,7 @@ import os
 MODULE_NAME = "/CalicoGIS"
 
 APP_PATH = os.getcwd() + "/CalicoGIS"
-DATABASE_BASE_PATH = APP_PATH + "/Databases"
+DATABASE_BASE_PATH = APP_PATH[:-len(MODULE_NAME)] + "/Databases"
 
 
 # - Raster / Polygon IO dircetories

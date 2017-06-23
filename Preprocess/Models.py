@@ -2,9 +2,9 @@
 
 import arcpy
 #from arcpy import env
-from arcpy.sa import * 
-
-import CalicoGIS.PreprocessingAPI.Path as path
+#from arcpy.sa import * 
+import CalicoGIS.Path as path
+import CalicoGIS.Analytics.Database as db
 
 
 
@@ -19,16 +19,21 @@ class StateCropRasterBuilder:
         self.CropPolygonOutputPath = path.CROP_POLYGON_BASE_PATH + self.RasterTitle + "_" + self.StateAbbreviation
         
     def ExportStateBoundaries(self):
+        process = db.StateBoundaryExtract()
         message = "Extracting state boundary for: " + self.StateAbbreviation
         print(message)
+        #process.Start()
         arcpy.Select_analysis(
                               in_features = path.STATE_BOUNDARY_INPUT,
                               out_feature_class = self.StateBoundaryPath,
                               where_clause = "STUSPS = '" + self.StateAbbreviation + "'"
                               )
-        
-        message = "State boundary extraction succeeded."
+        #process.Stop()
+        message = "State boundary extraction succeeded." 
         print(message)
+        #message = "Process Time: " + str(process.ElapsedTime) + " ms"
+        print(message)
+
         
     def ExtractCropRasterFromStateMask(self, imageName):
         message = "Extracting crop raster from state mask for " + self.StateAbbreviation
@@ -42,7 +47,7 @@ class StateCropRasterBuilder:
         message = "Finished extracting state crop raster for " + self.StateAbbreviation
         
     def ConvertCropRasterToPolygon(self):
-        message = "Converting crop rastoer for " + self.StateAbbreviation + " to polygon"
+        message = "Converting crop raster for " + self.StateAbbreviation + " to polygon"
         print(message)
         
         arcpy.RasterToPolygon_conversion(
