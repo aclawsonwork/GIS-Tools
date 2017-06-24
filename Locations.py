@@ -40,7 +40,7 @@ def GetById(id):
     connection = sql.connect(db.PROCESS_DB)
     cursor = connection.cursor()
     sqlSelect = "SELECT * FROM " + LOCATIONS_TABLENAME + " WHERE pk_location_id = " + str(id)
-    print(sqlSelect)
+    
     location = Location()
     for row in cursor.execute(sqlSelect):
         location.PkLocationId = row[0]
@@ -64,7 +64,7 @@ def GetByCode(cd):
     connection = sql.connect(db.PROCESS_DB)
     cursor = connection.cursor()
     sqlSelect = "SELECT * FROM " + LOCATIONS_TABLENAME + " WHERE state_cd = '" + cd + "'"
-    print(sqlSelect)
+    
     location = Location()
     for row in cursor.execute(sqlSelect):
         location.PkLocationId = row[0]
