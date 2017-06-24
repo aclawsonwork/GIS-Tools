@@ -28,4 +28,4 @@ CROP_RASTER_BASE_PATH = PREPROCESSING_TEMP_DIR + TEMP_RASTER_FOLDER
 
 STATE_BOUNDARY_INPUT = "D:/Projects/CSI_FESTF/GIS/Processing_Data/Temp/Preprocessing_Temp_Vector.gdb/rf_us_na_pr_vi_bndry_prj"
 
-SDE_SPATIAL_PATH = "C:/Users/ciserver/AppData/Roaming/ESRI/Desktop10.5/ArcCatalog/csifesftf_spatial_sde.sde"
+SDE_SPATIAL_PATH = "C:/Users/ciserver/AppData/Roaming/ESRI/Desktop10.5/ArcCatalog/csifestf_spatial_sde.sde"

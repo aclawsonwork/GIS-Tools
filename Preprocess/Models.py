@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import arcpy
-#from arcpy import env
-#from arcpy.sa import * 
+from arcpy import env
+from arcpy.sa import * 
 import CalicoGIS.Path as path
 import CalicoGIS.Analytics.Database as db
 import CalicoGIS.Analytics.Process as proc
@@ -77,12 +77,13 @@ class StateCropRasterBuilder:
         message = "Import polygon to SDE for " + self.StateAbbreviation
         print(message)
         process.Start()
+        arcpy.CheckOutExtension("Spatial")
         arcpy.FeatureClassToFeatureClass_conversion(in_features=self.CropPolygonOutputPath,
                                                 out_path=path.SDE_SPATIAL_PATH,
                                                 out_name=self.RasterTitle + "_" + self.StateAbbreviation,
                                                 where_clause=whereClause,
                                                 config_keyword=config)
-        
+        arcpy.CheckInExtension("Spatial")
         process.Stop()
         message = "Import to SDE finished for " + self.StateAbbreviation
         print(message)
