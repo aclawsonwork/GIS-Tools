@@ -25,6 +25,8 @@ class Process:
         self.EndTime = time.time()
         self.ElapsedTime = self.EndTime - self.StartTime
         #self.Writer.Write()
+    def Write(self):
+        self.Writer.Write()
             
 class StateBoundaryExtract(Process):
     def __init__(self):

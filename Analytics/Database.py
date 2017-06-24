@@ -16,6 +16,7 @@ class DBWriter:
         self.Process = process
         self.Tablename = process.Tablename
         self.InsertStatement = None
+        self.InsertValues = None
         self.Connection = None
         self.Cursor = None
         
@@ -23,8 +24,8 @@ class DBWriter:
         dateString = str(self.Process.Date.year) + "-"+ str(self.Process.Date.month) + "-" + str(self.Process.Date.day)
         #elapsedTime = process.ElapsedTime
         
-        insertSQL = "INSERT INTO " + PROCESS_DB + "." + self.Tablename + " (date, elapsed_time) "
-        insertSQL = insertSQL + "VALUES(" + dateString + ", " + str(self.Process.ElapsedTime) + ")"
+        insertSQL = "INSERT INTO " + self.Tablename + " (date, elapsed_time) VALUES(?,?)"
+        self.InsertValues = (dateString,str(self.Process.ElapsedTime))
         self.InsertStatement = insertSQL
         
         # logic for adding to sqlite db
@@ -32,38 +33,12 @@ class DBWriter:
         self.BuildInsertStatement()
         self.Connection = sqlite3.connect(PROCESS_DB)
         self.Cursor = self.Connection.cursor()
-        self.Cursor.execute(self.InsertStatement)
+        self.Cursor.execute(self.InsertStatement,self.InsertValues)
+        self.Connection.commit()
         self.Cursor.close()
-        
-    
-    
-        
-        
-class Process:
-    
-    def __init__(self):
-        self.Writer = None
-        self.Tablename = None
-        self.Date = datetime.date.today()
-        self.Name = None
-        self.StartTime = None
-        self.EndTime = None
-        self.ElapsedTime = None
-    
-    def Start(self):
-        self.StartTime = time.time()
-        
-    def Stop(self):
-        self.EndTime = time.time()
-        self.ElapsedTime = self.EndTime - self.StartTime
-        #self.Writer.Write()
-            
-class StateBoundaryExtract(Process):
-    def __init__(self):
-        self.Name = "State Boundary Extract"
-        self.Tablename = "state_boundary_extract"
-        self.Date = datetime.date.today()
-        self.Writer = DBWriter(self)
+        self.Connection.close()
+
+
         
     
         
