@@ -7,6 +7,12 @@ import datetime
 import CalicoGIS.Path as path
 import CalicoGIS.Analytics.Database as db
 
+STATE_IMPORT_TYPE = 1
+STATE_BOUNDARY_EXTRACT_TYPE = 2
+RASTER_EXTRACT_TYPE = 3
+CONVERT_RASTOR_TO_POLYGON_TYPE = 4
+IMPORT_TO_SDE = 5
+
 class Process:
     
     def __init__(self):
