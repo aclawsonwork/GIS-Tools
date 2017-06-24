@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import arcpy
-#from arcpy import env
-#from arcpy.sa import * 
+from arcpy import env
+from arcpy.sa import * 
 import CalicoGIS.Path as path
 import CalicoGIS.Analytics.Database as db
 import CalicoGIS.Analytics.Process as proc
