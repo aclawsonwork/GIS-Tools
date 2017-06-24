@@ -52,7 +52,7 @@ class ExtractByMask(Process):
         self.Name = "Extract Raster By Mask"
         self.Tablename = "raster_extract"
         self.ProcessTypeId = RASTER_EXTRACT_TYPE
-        self.Data = datetime.date.today()
+        self.Date = datetime.date.today()
         self.Writer = db.DBWriter(self)
         
 class ConvertRasterToPolygon(Process):
