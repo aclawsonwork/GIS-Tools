@@ -10,7 +10,7 @@ import datetime
 import CalicoGIS.Path as path
 
 PROCESS_DB = path.DATABASE_BASE_PATH + "/processes.db"
-PROCESS_TABLE = "processes"
+PROCESS_TABLE = "process"
 
 class DBWriter:
     def __init__(self, process):
@@ -25,8 +25,8 @@ class DBWriter:
         dateString = str(self.Process.Date.year) + "-"+ str(self.Process.Date.month) + "-" + str(self.Process.Date.day)
         #elapsedTime = process.ElapsedTime
         
-        insertSQL = "INSERT INTO " + PROCESS_TABLE + " (date, elapsed_time) VALUES(?,?)"
-        self.InsertValues = (dateString,str(self.Process.ElapsedTime))
+        insertSQL = "INSERT INTO " + PROCESS_TABLE + " (fk_process_type_id, fk_location_id, process_date, elapsed_time_seconds) VALUES(?,?,?,?)"
+        self.InsertValues = (self.Process.ProcessTypeId, self.Process.Location.PkLocationId, dateString, str(self.Process.ElapsedTime))
         self.InsertStatement = insertSQL
         
         # logic for adding to sqlite db
