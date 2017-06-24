@@ -6,6 +6,7 @@ import time
 import datetime
 import CalicoGIS.Path as path
 import CalicoGIS.Analytics.Database as db
+import CalicoGIS.Locations as loc
 
 STATE_IMPORT_TYPE = 1
 STATE_BOUNDARY_EXTRACT_TYPE = 2
@@ -17,12 +18,16 @@ class Process:
     
     def __init__(self):
         self.Writer = None
+        self.Location = None
         self.Tablename = None
         self.Date = datetime.date.today()
         self.Name = None
         self.StartTime = None
         self.EndTime = None
         self.ElapsedTime = None
+    
+    def SetLocation(self, locationCode):
+        self.Location = loc.GetByCode(locationCode)
     
     def Start(self):
         self.StartTime = time.time()
