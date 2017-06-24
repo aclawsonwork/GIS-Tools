@@ -15,7 +15,6 @@ PROCESS_TABLE = "process"
 class DBWriter:
     def __init__(self, process):
         self.Process = process
-        self.Tablename = process.Tablename
         self.InsertStatement = None
         self.InsertValues = None
         self.Connection = None

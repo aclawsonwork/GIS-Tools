@@ -19,7 +19,6 @@ class Process:
     def __init__(self):
         self.Writer = None
         self.Location = None
-        self.Tablename = None
         self.Date = datetime.date.today()
         self.Name = None
         self.StartTime = None
@@ -38,11 +37,18 @@ class Process:
         #self.Writer.Write()
     def Write(self):
         self.Writer.Write()
-            
+
+class StateImportProcess(Process):
+    def __init__(self):
+        self.Name = "State Import Process"
+        self.ProcessTypeId = STATE_IMPORT_TYPE
+        self.Date = datetime.date.today()
+        self.Writer = db.DBWriter(self)
+        
 class StateBoundaryExtract(Process):
     def __init__(self):
         self.Name = "State Boundary Extract"
-        self.Tablename = "state_boundary_extract"
+        
         self.ProcessTypeId = STATE_BOUNDARY_EXTRACT_TYPE
         self.Date = datetime.date.today()
         self.Writer = db.DBWriter(self)
@@ -50,7 +56,6 @@ class StateBoundaryExtract(Process):
 class ExtractByMask(Process):
     def __init__(self):
         self.Name = "Extract Raster By Mask"
-        self.Tablename = "raster_extract"
         self.ProcessTypeId = RASTER_EXTRACT_TYPE
         self.Date = datetime.date.today()
         self.Writer = db.DBWriter(self)
@@ -58,15 +63,13 @@ class ExtractByMask(Process):
 class ConvertRasterToPolygon(Process):
     def __init__(self):
         self.Name = "Convert Raster to Polygon"
-        self.Tablename = "raster_conversion"
         self.ProcessTypeId = CONVERT_RASTOR_TO_POLYGON_TYPE
-        self.Data = datetime.date.today()
+        self.Date = datetime.date.today()
         self.Writer = db.DBWriter(self)
         
 class ImportPolygonToSDE(Process):
     def __init__(self):
         self.Name = "Import Polygon To SDE"
-        self.Tablename = "import_polygon"
         self.ProcessTypeId = IMPORT_TO_SDE_TYPE
-        self.Data = datetime.date.today()
+        self.Date = datetime.date.today()
         self.Writer = db.DBWriter(self)
