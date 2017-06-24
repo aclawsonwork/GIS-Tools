@@ -77,12 +77,13 @@ class StateCropRasterBuilder:
         message = "Import polygon to SDE for " + self.StateAbbreviation
         print(message)
         process.Start()
+        arcpy.CheckOutExtension("Spatial")
         arcpy.FeatureClassToFeatureClass_conversion(in_features=self.CropPolygonOutputPath,
                                                 out_path=path.SDE_SPATIAL_PATH,
                                                 out_name=self.RasterTitle + "_" + self.StateAbbreviation,
                                                 where_clause=whereClause,
                                                 config_keyword=config)
-        
+        arcpy.CheckInExtension("Spatial")
         process.Stop()
         message = "Import to SDE finished for " + self.StateAbbreviation
         print(message)
