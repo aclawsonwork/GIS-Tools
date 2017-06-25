@@ -20,7 +20,7 @@ class StateCropRasterBuilder:
         self.CropPolygonOutputPath = path.CROP_POLYGON_BASE_PATH + self.RasterTitle + "_" + self.StateAbbreviation
         
     def ExportBoundaries(self):
-        process = proc.StateBoundaryExtract()
+        process = proc.StateBoundaryExtract(self.StateAbbreviation)
         message = "Extracting state boundary for: " + self.StateAbbreviation
         print(message)
         process.Start()
@@ -38,7 +38,7 @@ class StateCropRasterBuilder:
         
     def ExtractRasterFromMask(self):
         arcpy.CheckOutExtension("Spatial")
-        process = proc.ExtractByMask()
+        process = proc.ExtractByMask(self.StateAbbreviation)
         message = "Extracting crop raster from state mask for " + self.StateAbbreviation
         print(message)
         process.Start()
@@ -54,7 +54,7 @@ class StateCropRasterBuilder:
         print(message)
         
     def ConvertRasterToPolygon(self):
-        process = proc.ConvertRasterToPolygon()
+        process = proc.ConvertRasterToPolygon(self.StateAbbreviation)
         message = "Converting crop raster for " + self.StateAbbreviation + " to polygon"
         print(message)
         process.Start()
@@ -72,7 +72,7 @@ class StateCropRasterBuilder:
         print(message)
         
     def ImportPolygonToSDE(self, whereClause, config):
-        process = proc.ImportPolygonToSDE()
+        process = proc.ImportPolygonToSDE(self.StateAbbreviation)
         
         message = "Import polygon to SDE for " + self.StateAbbreviation
         print(message)
